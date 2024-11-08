@@ -9,7 +9,7 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Post('savePassword')
-  savePassword(@Body() payload) {
+  async savePassword(@Body() payload) {
     try {
       this.logger.log(
         `Handling request to save password with payload, ${JSON.stringify(
@@ -17,10 +17,18 @@ export class AppController {
         )}`,
       );
 
-      return frameResponse('SUCCESS', 'Password Saved Successfully');
+      return frameResponse(
+        'SUCCESS',
+        'Password Saved Successfully',
+        await this.appService.savePassword(payload),
+      );
     } catch (err) {
       this.logger.debug(
         `Save password request failed with an error message,${err.message}`,
+      );
+      return frameResponse(
+        'SUCCESS',
+        `Failed to save the password with error message, ${err.message} `,
       );
     }
   }
