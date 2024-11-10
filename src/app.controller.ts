@@ -4,7 +4,7 @@ import { frameResponse } from './utils/response.frame';
 
 @Controller()
 export class AppController {
-  private logger: Logger = new Logger('PASSWORD-MANAGER');
+  private logger: Logger = new Logger('PASSWORD-MANAGER-CONTROLLER');
 
   constructor(private readonly appService: AppService) {}
 
@@ -34,7 +34,7 @@ export class AppController {
   }
 
   @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  getAllPassword(): string {
+    return this.appService.getAllPassword();
   }
 }
