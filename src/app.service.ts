@@ -7,10 +7,7 @@ import { Repository } from 'typeorm';
 export class AppService {
   private logger: Logger;
 
-  constructor(
-    @Inject(passwordSaverEntity)
-    private BE: Repository<passwordSaverEntity>,
-  ) {
+  constructor() {
     this.logger = new Logger('PASSWORD-MANAGER-SERVICE');
   }
   async savePassword(inData: ISavePassword) {
