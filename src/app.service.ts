@@ -1,6 +1,6 @@
 import { Inject, Injectable, Logger } from '@nestjs/common';
 import { ISavePassword } from './utils/password.manager.interface';
-import { passwordSaverEntity } from './entity/password.manager.entity';
+import { PasswordSaverEntity } from './entity/password.manager.entity';
 import { Repository } from 'typeorm';
 
 @Injectable()
