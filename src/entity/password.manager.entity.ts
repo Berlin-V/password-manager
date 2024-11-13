@@ -10,29 +10,33 @@ import {
 } from 'typeorm';
 
 @Entity('password_saver')
-export class passwordSaverEntity extends BaseEntity {
-  @PrimaryColumn()
+export class PasswordSaverEntity extends BaseEntity {
+  @PrimaryColumn({ type: 'int64' }) // Spanner expects INT64 for numeric IDs
   id: number;
 
-  @PrimaryColumn({ name: 'user_id' })
+  @PrimaryColumn({ name: 'user_id', type: 'int64' })
   userID: number;
 
-  @Column({ type: 'string' })
+  @Column({ type: 'string' }) // STRING in Spanner
   name: string;
 
-  @Column()
+  @Column({ type: 'string' })
   password: string;
 
   @Column({ type: 'string', nullable: true })
   description: string;
 
-  @Column({ name: 'icon_url', nullable: true })
+  @Column({ name: 'icon_url', type: 'string', nullable: true })
   iconUrl: string;
 
-  @Column({ default: false })
+  @Column({ type: 'bool', default: false }) // BOOL in Spanner
   pin: boolean;
 
-  @CreateDateColumn({ name: 'created_at', default: () => 'CURRENT_TIMESTAMP' })
+  @CreateDateColumn({
+    name: 'created_at',
+    type: 'timestamp',
+    default: () => 'CURRENT_TIMESTAMP',
+  }) // TIMESTAMP in Spanner
   createdAt: Date;
 
   @UpdateDateColumn({
@@ -43,11 +47,11 @@ export class passwordSaverEntity extends BaseEntity {
   })
   lastUpdatedAt: Date;
 
-  @Column({ name: 'created_by', type: 'varchar' })
+  @Column({ name: 'created_by', type: 'string' })
   createdBy: string;
 
-  @Column({ name: 'updated_by', type: 'varchar' })
+  @Column({ name: 'updated_by', type: 'string' })
   updatedBy: string;
 }
 
-export const entitiesToInject = [passwordSaverEntity];
+export const entitiesToInject = [PasswordSaverEntity];

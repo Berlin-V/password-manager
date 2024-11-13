@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { passwordSaverEntity } from 'src/entity/password.manager.entity';
+import { PasswordSaverEntity } from 'src/entity/password.manager.entity';
 import { DataSource, DataSourceOptions } from 'typeorm';
 
 export const databaseConfig: DataSourceOptions = {
@@ -9,8 +9,8 @@ export const databaseConfig: DataSourceOptions = {
   instanceId: process.env.SPANNER_INSTANCE_ID,
   databaseId: 'sb-postgres', //?? process.env.SPANNER_DATABASE
   logging: false,
-  entities: [passwordSaverEntity],
-  synchronize: true,
+  entities: [PasswordSaverEntity],
+  synchronize: false,
 };
 
 export const environment = {
